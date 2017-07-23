@@ -1,0 +1,12 @@
+--- include/luxrays/utils/utils.h
++++ include/luxrays/utils/utils.h
+@@ -34,9 +34,6 @@
+ #include <float.h>
+ #define isnan(a) _isnan(a)
+ #define isinf(f) (!_finite((f)))
+-#else
+-#define isnan(a) std::isnan(a)
+-#define isinf(f) std::isinf(f)
+ #endif
+ 
+ #if defined(WIN32)

@@ -3311,3 +3311,7 @@ libdleyna-renderer-1.0.so.1 dleyna-renderer-0.6.0_1
 libdleyna-server-1.0.so.1 dleyna-server-0.6.0_1
 liburiparser.so.1 uriparser-0.8.6_1
 libcpptest.so.0 cpptest-1.1.2_1
+libblosc.so.1 blosc-1.14.3_1
+libkid3-core.so.3.6.0 kid3-3.6.0_1
+libkid3-gui.so.3.6.0 kid3-3.6.0_1
+liblux.so luxrender-1.6_1

@@ -1,0 +1,34 @@
+# Template file for 'luxrender'
+pkgname=luxrender
+version=2.0rc1
+#_githash=be1f7d130e3f2b71e498470379bb8ba0d2473125
+revision=1
+wrksrc="LuxCore-luxcorerender_v${version}"
+build_style=cmake
+configure_args="-DBUILD_SHARED_LIBS=ON -LAH"
+#configure_args+?=" -DPYTHON_LIBRARY=${XBPS_CROSS_BASE}/usr/lib"
+hostmakedepends="pkg-config bison flex"
+Xmakedepends="luxrays-devel fftw-devel"
+makedepends="openimageio-devel libopenexr-devel boost-devel boost-python
+ boost-build libgomp-devel tiff-devel libpng-devel libjpeg-turbo-devel
+ MesaLib-devel opencl-clhpp opencl-headers glu-devel gtk+3-devel embree-devel
+ python3-devel python3-tables pyside-tools libXv-devel tbb-devel blosc-devel"
+short_desc="Physically based render engine"
+maintainer="Piraty <piraty1@inbox.ru>"
+license="Apache-2.0"
+homepage="https://www.luxcorerender.org"
+distfiles="https://github.com/LuxCoreRender/LuxCore/archive/luxcorerender_v${version}.tar.gz"
+checksum=a5b8c2309dd132a42db3d19ff86fbd0af59fa5f6ab465353bda912d94923d9e3
+
+pre_configureX() {
+	#fix PIE build
+	export CXXFLAGS="$CXXFLAGS $LDFLAGS"
+}
+
+Xpost_install() {
+	if [ -d ${DESTDIR}/usr/lib64 ]; then
+		mkdir -p ${DESTDIR}/usr/lib/
+		mv ${DESTDIR}/usr/lib64/* ${DESTDIR}/usr/lib/
+		rm -r ${DESTDIR}/usr/lib64
+	fi
+}
