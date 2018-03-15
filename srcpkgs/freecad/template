@@ -34,6 +34,25 @@ homepage="https://freecadweb.org/"
 distfiles="https://github.com/FreeCAD/FreeCAD/archive/${version}.tar.gz"
 checksum=ae017393476b6dc7f1192bcaf91ceedc2f9b791f2495307ce7c45efadb5266fb
 
+### GIT
+#
+version=0.17.20181015
+revision=1
+
+_githash="47536dcd3729d3db106af628d62f2bf449e68c49"
+distfiles="https://github.com/FreeCAD/FreeCAD/archive/${_githash}.tar.gz"
+checksum=
+wrksrc="FreeCAD-${_githash}"
+
+## <piraty>
+# - mpi.h isn't found regardless of the -devel package which should have it
+#		MpidotH:FILEPATH=MpidotH-NOTFOUND
+# - coin3-doc.xbps file is missing in repo.voidlinux.eu
+#
+###
+#
+### GIT
+
 post_install() {
 	# AppHomePath is computed with binary's realpath:
 	# do not move binaries but symlink them instead.
