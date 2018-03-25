@@ -1,0 +1,14 @@
+Description: Clean up build flags
+ - remove rpath
+Based on debian's patch: https://sources.debian.org/src/suitesparse/1:5.2.0+dfsg-1/debian/patches/buildflags.patch/
+--- SuiteSparse_config/SuiteSparse_config.mk
++++ SuiteSparse_config/SuiteSparse_config.mk
+@@ -348,7 +348,7 @@ SUITESPARSE_VERSION = 5.2.0
+ 
+     ifeq ($(UNAME),Linux)
+         # add the realtime library, librt, and SuiteSparse/lib
+-        LDLIBS += -lrt -Wl,-rpath=$(INSTALL_LIB)
++        LDLIBS += -lrt -Wl
+     endif
+ 
+     #---------------------------------------------------------------------------

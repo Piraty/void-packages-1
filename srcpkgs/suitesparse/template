@@ -1,0 +1,60 @@
+# Template file for 'suitesparse'
+pkgname=suitesparse
+version=5.1.0
+revision=1
+wrksrc=SuiteSparse
+build_style=gnu-makefile
+make_install_args="INSTALL=${DESTDIR}/usr INSTALL_INCLUDE=${DESTDIR}/usr/include"
+hostmakedepends="cmake gcc-fortran chrpath"
+makedepends="libgomp-devel openblas-devel"
+short_desc="Suite of sparse matrix software"
+maintainer="Piraty <piraty1@inbox.ru>"
+license="BSD, custom"
+homepage="http://faculty.cse.tamu.edu/davis/suitesparse.html"
+distfiles="http://faculty.cse.tamu.edu/davis/SuiteSparse/SuiteSparse-${version}.tar.gz"
+checksum=1b1371074224c6844697f3a55024d185b7ff6ffa49ac141d433fbb1aadf426f5
+
+# a patched metis is provided in-source
+build_options="metis"
+desc_option_metis="Enable support for metis"
+#build_options_default="metis"
+
+pre_configure() {
+	if [ ! "$build_option_metis" ] ; then
+		rm -r metis-*
+	fi
+}
+
+do_build() {
+	# OpenBLAS also provides LAPACK.
+	export LAPACK="-lopenblas"
+	make library 
+}
+
+pre_install() {
+	export LAPACK="-lopenblas"
+}
+
+post_install() {
+	local _dir
+	for _dir in bin ; do
+		vmkdir usr/${_lib}
+		vcopy ${_dir} usr/${_dir}
+	done
+
+	# copy licenses
+	vlicense LICENSE.txt
+	for _app in AMD BTF CAMD CCOLAMD CHOLMOD CSparse CXSparse GPUQREngine KLU LDL MATLAB_Tools RBio SPQR SuiteSparse_GPURuntime ssget UMFPACK ; do
+		vcopy ${_app}/Doc/License.txt usr/share/licenses/suitesparse/LICENSE_${_app}.txt
+	done
+}
+
+suitesparse-devel_packageX() {
+	short_desc+=" - development files"
+	depends="${sourcepkg}>=${version}_${revision}"
+	pkg_install() {
+		vmove usr/include
+		vmove usr/lib/*.so
+	}
+
+}
