@@ -1,7 +1,7 @@
 # Template file for 'octave'
 pkgname=octave
 version=4.2.2
-revision=2
+revision=3
 build_style=gnu-configure
 configure_args=" --with-blas=openblas --with-lapack=openblas
  $(vopt_if largearrays --enable-64)"
@@ -31,6 +31,7 @@ build_options="
 	opengl
 	openmp
 	qhull
+	suitesparse
 	zlib
 "
 
@@ -47,6 +48,7 @@ desc_option_imagemagick="Provides 'imread' and 'imwrite' functions."
 desc_option_largearrays="Enable large array (64bit pointers)." #req. 64bit BLAS
 desc_option_qhull="Provides 'convhull{,n}', 'delaunay{,n}' and 'voronoi{,n}' functions."
 desc_option_openmp="Enable support for OpenMP SMP multi-threading"
+desc_option_suitesparse="Enable support for improved performance on sparse matrices"
 desc_option_zlib="Support for compressed data."
 
 build_options_default="
@@ -60,6 +62,7 @@ build_options_default="
 	opengl
 	openmp
 	qhull
+	suitesparse
 	zlib
 "
 
@@ -75,6 +78,7 @@ makedepends+="
 	$(vopt_if opengl "glu-devel fltk-devel fontconfig-devel freetype-devel gl2ps-devel")
 	$(vopt_if openmp libgomp-devel)
 	$(vopt_if qhull libqhull-devel)
+	$(vopt_if suitesparse suitesparse-devel)
 	$(vopt_if zlib zlib-devel)
 "
 
