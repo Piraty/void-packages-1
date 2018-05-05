@@ -1,23 +1,44 @@
 # Template file for 'scribus'
+#TODO: add musl / execinfo patch, libexecinfo doesn't do it ..?
 pkgname=scribus
-version=1.4.7
+version=1.5.4
 revision=1
 build_style=cmake
-hostmakedepends="pkg-config qt-devel"
-makedepends="qt-devel zlib-devel cairo-devel lcms2-devel cups-devel libxml2-devel
- hyphen-devel ghostscript-devel boost-devel python-devel"
-depends="ghostscript"
+hostmakedepends="pkg-config"
+configure_args="-DWANT_GRAPHICSMAGICK=1"
+makedepends="qt5-tools-devel cairo-devel lcms2-devel cups-devel libxml2-devel
+ boost-devel python-devel harfbuzz-devel poppler-cpp-devel zlib-devel
+ hunspell-devel libpodofo-devel libgraphicsmagick-devel libwpg-devel libcdr-devel
+ libfreehand-devel libpagemaker-devel libqxp-devel libvisio-devel libmspub-devel
+ libpodofo-devel"
+#makedepends+=" osg-devel" #crashes the program at runtime (segfault) !
+#depends="ghostscript"
 short_desc="Open Source DTP (Desktop Publishing) application"
 maintainer="Enno Boland <gottox@voidlinux.eu>"
 license="GPL-2.0-or-later"
 homepage="https://scribus.net"
-distfiles="$SOURCEFORGE_SITE/scribus/scribus/${version}/scribus-${version}.tar.xz"
-checksum=42d335b4a59c26c8ae1e3f601676baa3c42b035b8cde326d195f7a30078e5fec
+#distfiles="$SOURCEFORGE_SITE/$pkgname/$pkgname-devel/$version/$pkgname-$version.tar.xz"
+#checksum=6480925250b2bb07028e2f378c02b67fe3e33206743671e03c07c701cd05da03
 
-pre_configure() {
-	sed -i 's#^Icon=scribus#^Icon=/usr/share/scribus/icons/scribus.png#' scribus.desktop
-}
-post_install() {
-	vinstall scribus.desktop 644 usr/share/applications
-	rm -rf ${DESTDIR}/usr/include
-}
+#yes,no
+_use_clang=no
+
+### use GITHUB mirror
+version=1.5.99.20180908
+revision=1
+# latest commit
+_githash=ca419a17762320ebd3c8d9db0327c0b7b49748c2
+distfiles="https://github.com/scribusproject/scribus/archive/${_githash}.tar.gz"
+checksum=622b0cf06f3f1adbc39440db8256971b679b316ce7553e9228e95a639f348881
+wrksrc=scribus-${_githash}
+
+# use CLANG
+if [ "${_use_clang}" = "yes" ] ; then
+	hostmakedepends+=" clang"
+	CC="/usr/bin/clang"
+	CXX="/usr/bin/clang++"
+	configure_args+=" -DCMAKE_C_COMPILER=${CC}"
+	configure_args+=" -DCMAKE_CXX_COMPILER=${CXX}"
+	nopie=yes
+fi;
+#configure_args+=" -DWANT_DEBUG=1 "
