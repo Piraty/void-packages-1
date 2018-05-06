@@ -1,0 +1,15 @@
+# Template file for 'dxpb'
+pkgname=dxpb
+version=0.0.15
+revision=1
+build_wrksrc=src
+build_style=gnu-makefile
+makedepends="libxbps-devel czmq-devel graphviz-devel libbsd-devel libgit2-devel
+ sqlite-devel"
+depends="runit"
+short_desc="Distributed X package builder"
+maintainer="Toyam Cox <Vaelatern@gmail.com>"
+license="ISC"
+homepage="https://gitlab.com/dxpb/dxpb"
+distfiles="https://gitlab.com/dxpb/dxpb/-/archive/${version}/dxpb-${version}.tar.gz"
+checksum=e048f18213bc39096987e4eecb9cf4b3791cbdb54217749700c49ffecc8c17cf
