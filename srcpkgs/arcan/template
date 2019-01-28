@@ -5,7 +5,7 @@ revision=3
 build_wrksrc=src
 build_style=cmake
 configure_args="-DDISTR_TAG='Void Linux' -DVIDEO_PLATFORM=egl-dri"
-makedepends="ffmpeg-devel harfbuzz-devel liblzma-devel MesaLib-devel
+makedepends="MesaLib-devel ffmpeg-devel harfbuzz-devel liblzma-devel
  libopenal-devel libusb-devel libvncserver-devel libxkbcommon-devel sqlite-devel
  $(vopt_if tesseract 'tesseract-ocr-devel leptonica-devel') vlc-devel"
 short_desc="Combined display server, multimedia framework and game engine"
@@ -25,7 +25,6 @@ else
 	makedepends+=" LuaJIT-devel"
 fi
 
-CFLAGS="-fcommon"
 if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
 	makedepends+=" libatomic-devel"
 	CFLAGS="-latomic"
@@ -51,7 +50,7 @@ post_install() {
 	done
 
 	# need suid for drmMaster, dropped immediately after open+master
-	chmod u+s ${DESTDIR}/usr/bin/arcan
+	#chmod u+s ${DESTDIR}/usr/bin/arcan
 }
 
 arcan-devel_package() {
@@ -63,4 +62,23 @@ arcan-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove usr/include
 	}
+}
+
+
+### BUILD FROM GIT
+#
+#
+_githash=88e689bad1392be8d123f75cc8a8ffa85eae5efa
+version=0.6.0.git20201102
+revision=1
+wrksrc=arcan-${_githash}
+
+distfiles="https://github.com/letoram/${pkgname}/archive/${_githash}.tar.gz
+ https://github.com/letoram/openal/archive/${_versionOpenal}.tar.gz>openal_arcan.${_versionOpenal}.tar.gz"
+checksum="b07c8d98486d559a401c86b245f425c7e0248589651cfb685ad826d8d07b48be
+ 3a50a87c05b67c466a868cc77f8dc7f9cfc9466aeeafcd823daca0d108c504da"
+
+pre_configure() {
+	# provide patched openAL
+	ln -s ${XBPS_BUILDDIR}/openal-${_versionOpenal} ${XBPS_BUILDDIR}/arcan-${_githash}/external/git/openal
 }
