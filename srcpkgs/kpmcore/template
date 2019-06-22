@@ -1,18 +1,19 @@
 # Template file for 'kpmcore'
 pkgname=kpmcore
-version=3.3.0
+version=4.0.0
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF"
 hostmakedepends="extra-cmake-modules python qt5-devel qt5-qmake pkg-config kcoreaddons"
-makedepends="qt5-devel libatasmart-devel libparted-devel kwidgetsaddons-devel ki18n-devel kcoreaddons-devel"
+makedepends="qt5-devel libatasmart-devel libparted-devel kwidgetsaddons-devel
+ ki18n-devel kcoreaddons-devel qca-qt5-devel kauth-devel"
 depends="parted"
 short_desc="Library for managing partitions"
 maintainer="jambonmcyeah <jambonmcyeah@gmail.com>"
-license="GPL-2"
-homepage="http://kde.org/applications/system/kdepartitionmanager/"
+license="GPL-3.0-or-later"
+homepage="https://kde.org/applications/system/org.kde.partitionmanager"
 distfiles="http://download.kde.org/stable/${pkgname}/${version}/src/${pkgname}-${version}.tar.xz"
-checksum=b8d6fa3c0d89feebf690a424d98ad36acb2438b1099a5b620ee349989d04db68
+checksum=d7f044ca256369bec62ec5460bad397cd67473f4a8b2d48686e91a9bf24ddf6d
 
 if [ -n "$CROSS_BUILD" ]; then
 	configure_args+=" -DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
