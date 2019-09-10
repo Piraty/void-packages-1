@@ -1,0 +1,15 @@
+# reason:
+#	during compilation of host tools, the host compiler is invoked with
+#	the same cflags, so it fails on all hosts != ppc64 which don't know it
+
+--- common.gypi
++++ common.gypi
+@@ -390,7 +390,7 @@
+             'ldflags': [ '-m32' ],
+           }],
+           [ 'target_arch=="ppc64" and OS!="aix"', {
+-            'cflags': [ '-m64', '-mminimal-toc' ],
++            'cflags': [ '-m64' ],
+             'ldflags': [ '-m64' ],
+           }],
+           [ 'target_arch=="s390x"', {
