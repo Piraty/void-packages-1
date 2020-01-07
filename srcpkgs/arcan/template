@@ -1,7 +1,7 @@
 # Template file for 'arcan'
 pkgname=arcan
 version=0.5.5.2
-revision=2
+revision=3
 build_wrksrc=src
 build_style=cmake
 configure_args="-DDISTR_TAG='Void Linux' -DVIDEO_PLATFORM=egl-dri"
@@ -59,6 +59,7 @@ post_install() {
 arcan-devel_package() {
 	short_desc+=" - development files"
 	depends="${sourcepkg}>=${version}_${revision}"
+	depends+=" util-linux=2.34_5"
 	pkg_install() {
 		vmove "usr/lib/*.so"
 		vmove "usr/lib/*.a"
