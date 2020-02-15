@@ -1,0 +1,20 @@
+# Template file for 'libpqcrypto'
+pkgname=libpqcrypto
+version=20180314
+revision=1
+hostmakedepends="python3"
+makedepends="libressl-devel gmp-devel"
+short_desc="Post-quantum cryptographic software library"
+maintainer="Piraty <piraty1@inbox.ru>"
+license="Public Domain"
+homepage="https://libpqcrypto.org/"
+distfiles="https://libpqcrypto.org/libpqcrypto-${version}.tar.gz"
+checksum=57c88af8a37907a28871b3c24ac49c7bb16ddbcb29be055d02c3c0ef6bd25a96
+
+do_build() {
+	./build
+}
+
+do_install() {
+	echo FIXME
+}
