@@ -1,0 +1,19 @@
+# Template file for 'neochat'
+pkgname=neochat
+version=1.0.1
+revision=1
+wrksrc="${pkgname}-v${version}"
+build_style=cmake
+hostmakedepends="extra-cmake-modules gettext pkg-config"
+makedepends="cmark-devel qt5-devel qt5-declarative-devel qt5-multimedia-devel
+qt5-quickcontrols2-devel qt5-svg-devel qtkeychain-qt5-devel kcoreaddons-devel
+kdbusaddons-devel ki18n-devel kirigami2-devel knotifications-devel
+kquickimageeditor libquotient-devel"
+depends="kitemmodels kquickimageeditor"
+short_desc="Client for matrix, the decentralized communication protocol"
+maintainer="Piraty <piraty1@inbox.ru>"
+# $(grep -r -i SPDX-License-Identifier | rev | cut -d':' -f1 | rev | sort | uniq)
+license="BSD-2-Clause, BSD-3-Clausem, GPL-2.0-or-later, GPL-3.0-only, GPL-3.0-or-later, LGPL-2.1-or-later"
+homepage="https://invent.kde.org/network/neochat/"
+distfiles="https://invent.kde.org/network/${pkgname}/-/archive/v${version}/${pkgname}-v${version}.tar.gz"
+checksum=f1573127b5438eb218817055a8d583c9c148f66d728639fe5c775c2c3d35e708
