@@ -1,0 +1,14 @@
+# Template file for 'kquickimageeditor'
+pkgname=kquickimageeditor
+version=0.1.3
+revision=1
+wrksrc=${pkgname}-v${version}
+build_style=cmake
+hostmakedepends="extra-cmake-modules"
+makedepends="qt5-devel qt5-declarative-devel"
+short_desc="QtQuick components providing basic image editing capabilities"
+maintainer="Piraty <piraty1@inbox.ru>"
+license="LGPL-2.1-or-later"
+homepage="https://invent.kde.org/libraries/kquickimageeditor"
+distfiles="https://invent.kde.org/libraries/kquickimageeditor/-/archive/v${version}/kquickimageeditor-v${version}.tar.gz"
+checksum=787ac9f7790816cea6882129d68111a15ab98aa4d4ab4be4e225b2adca0fe261
