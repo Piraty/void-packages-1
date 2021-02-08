@@ -2981,6 +2981,7 @@ libserialport.so.0 libserialport-0.1.1_1
 libsigrok.so.4 libsigrok-0.5.0_1
 libsigrokcxx.so.4 libsigrok-0.5.0_1
 libsigrokdecode.so.4 libsigrokdecode-0.5.0_2
+libQuotient.so.0.6 libquotient-0.6.4_1
 libglyr.so.1 glyr-1.0.8_1
 libPocoJSON.so.64 poco-1.9.4_1
 libPocoMongoDB.so.64 poco-1.9.4_1
